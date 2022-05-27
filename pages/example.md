@@ -4,4 +4,4 @@ layout: default
 
 ## Ejemplo Práctico
 
-[Página Principal](/)
+[Página Principal]({{site.baseurl}}/)

@@ -4,4 +4,4 @@ layout: default
 
 ## Documentación
 
-[Página Principal](/)
+[Página Principal]({{site.baseurl}}/)

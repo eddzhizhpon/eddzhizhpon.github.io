@@ -4,3 +4,4 @@ description: Información básica para implementar SystemC en soluciones de simu
 show_downloads: true
 google_analytics:
 theme: jekyll-theme-minimal
+baseurl: /manual-tecnico-systemc
