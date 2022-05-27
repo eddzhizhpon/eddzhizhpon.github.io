@@ -33,7 +33,7 @@ Los requisitos específicos de software dependen en gran medida del sistema oper
 
 SystemC puede ser descargado desde la página <a href="https://www.accellera.org/downloads/standards/systemc" target="_blank">Accellera.org</a>. El cual incluye una documentación y una serie de anotaciones para la configuración e instalación en los diferentes sistemas operativos (Linux, Windows, Mac OS X, entre otros).
 
-De acuerdo con la documentación oficial de SystemC, la instalación se basa en CMake para unificar las configuraciones en diferentes plataformas Unix y Windows. Lo que genera los archivos necesarios para compilar/instalar usando diferentes compiladores (p. ej., GNU Make o Ninja) e IDE (p. ej., Eclipse o VSCode).
+De acuerdo con la documentación oficial de SystemC, la instalación se basa en GMake para unificar las configuraciones en diferentes plataformas Unix y Windows. Lo que genera los archivos necesarios para compilar/instalar usando diferentes compiladores (p. ej., GNU Make o Ninja) e IDE (p. ej., Eclipse o VSCode).
 
 Dentro de la misma documentación, nos presenta varias opciones de compiladores en los diferentes sistemas operativos y sus arquitecturas compatibles. Para ejemplificar este proceso, se lo realizará en GNU/Linux x86_64, utilizando GCC (GNU Compiler Collection). Para ello, ya se debe contar con la instalación de los paquetes <a href="https://gcc.gnu.org/" target="_blank">GCC</a> y <a href="https://www.gnu.org/software/make/" target="_blank">GMake</a> .
 
@@ -86,7 +86,8 @@ rm -rf objdir
 export SYSTEMC_HOME="/opt/systemc-2.3.3"
 export LD_LIBRARY_PATH="$SYSTEMC_HOME/lib-linux64"
 ```
-<small>Opcional: Estas variables pueden ser agregadas dentro del archivo `.profile`. Caso contrario, se debe exportar las varibles antes de compilar</small>
+El directorio a donde apunta `SYSTEMC_HOME` debe ser el que se configuró con el parámetro `--prefix` en el paso 6.<br/><br/>
+<small>Opcional: Estas variables pueden ser agregadas dentro del archivo `.profile`. Caso contrario, se debe exportar las varibles antes de compilar.</small>
 
 * * *
 
