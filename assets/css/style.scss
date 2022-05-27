@@ -1,0 +1,40 @@
+---
+---
+
+@import "jekyll-theme-minimal";
+
+.main-navbar {
+    margin: 1rem 0.1rem;
+    width: 98%;
+    background-color: #aaa;
+
+    padding: 0.4rem;
+    border-radius: 0.4rem;
+}
+
+.main-navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.main-navbar li {
+    display: inline-block;
+    padding: 0.6rem;
+    background-color: white;
+    border-radius: 0.4rem;
+    margin: 0.2rem 0.1rem;
+}
+
+.main-navbar li a {
+    color: black;
+    font-weight: bold;
+    padding: 0.6rem;
+}
+
+.main-navbar li:hover {
+    font-weight: bold;
+    background-color: #eee;
+}
