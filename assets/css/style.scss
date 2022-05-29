@@ -4,9 +4,9 @@
 @import "jekyll-theme-minimal";
 
 .main-navbar {
-    margin: 1rem 0.1rem;
+    margin: 0;
     width: 98%;
-    background-color: #aaa;
+    background-color: #2E8BC0;
 
     padding: 0.4rem;
     border-radius: 0.4rem;
@@ -36,5 +36,23 @@
 
 .main-navbar li:hover {
     font-weight: bold;
-    background-color: #eee;
+    background-color: #eeeeeeFA;
+}
+
+.detail-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0rem 0.5rem 1rem 0.0rem;
+    padding: 0.8rem;
+    border-radius: 2px;
+}
+
+.detail-title:hover {
+    background-color: #eeeeee99;
+    cursor: pointer;
+}
+
+.detail-content {
+    margin: 0.2rem;
+    padding: 0.1rem;
 }
