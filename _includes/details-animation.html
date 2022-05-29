@@ -1,0 +1,17 @@
+<script>
+    function togleAnimation() {
+        let el = $(this);
+        if (!this.open) {
+            el.addClass("fade").one('animationend', function () {
+                el.removeClass("fade");
+            });
+        }
+    }
+    function load() {
+        var elements = document.getElementsByTagName("details");
+        for (let el of elements) {
+            el.addEventListener("click", togleAnimation, false);
+        }
+    }
+    document.addEventListener("DOMContentLoaded", load, false);
+</script>
