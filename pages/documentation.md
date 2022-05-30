@@ -6,7 +6,7 @@ layout: default
 
 ***
 
-<details markdown=1 class="detail">
+<details markdown=1>
 <summary markdown="span" class="detail-title">
 Introducción a SystemC
 </summary>
@@ -27,7 +27,7 @@ Los elementos fundamentales para construir un programa con SystemC, son tres.
 
 3. **El módulo:** Un módulo, en el contexto de SystemC, es la estructura base para la construcción de cualquier proceso de simulación. En la siguiente sección se profundizará este concepto.
 
-A continuación, se mostrará el código para obtener un "Hola Mundo":
+**A continuación, se mostrará el código para obtener un "Hola Mundo":**
 
 ```cpp
 #include "systemc.h"
@@ -53,19 +53,149 @@ int sc_main(int, char *[])
 }
 ```
 
-### B. Constructor
+### B. Módulo
+Un módulo de SystemC es el principal elemento para representar un componente de un sistema real, el cual tiene un estado, comportamiento y una estructura definida para permitir la comunicación con otros módulos.
+
+Para definir un módulo, se pueden usar tres diferentes enfoques:
+<ol>
+<li markdown=1>
+
+**Usando el macro SC_MODULE**
+
+```cpp
+#include "systemc.h"
+
+SC_MODULE(MODULE_A)
+{
+  SC_CTOR(MODULE_A)
+  {
+    std::cout << "Constructor de " << name() << std::endl;
+  }
+};
+
+int sc_main(int, char *[])
+{
+  MODULE_A module_a("module_a");
+  sc_start();
+  return 0;
+}
+```
+</li>
+<li markdown=1>
+
+**Usando structure:**
+
+```cpp
+#include "systemc.h"
+
+struct MODULE_B : public sc_module
+{
+  SC_CTOR(MODULE_B)
+  {
+    std::cout << "Constructor de " << name() << std::endl;
+  }
+};
+
+int sc_main(int, char *[])
+{
+  MODULE_B module_b("module_b");
+  sc_start();
+  return 0;
+}
+```
+</li>
+<li markdown=1>
+
+**Usando class:**
+
+```cpp
+#include "systemc.h"
+
+class MODULE_C : public sc_module
+{
+public:
+  SC_CTOR(MODULE_C)
+  {
+    std::cout << "Constructor de " << name() << std::endl;
+  }
+};
+
+int sc_main(int, char *[])
+{
+  MODULE_C module_c("module_c");
+  sc_start();
+  return 0;
+}
+```
+
+</li>
+</ol>
 
 
+### C. Constructor
+Todo módulo de SystemC debe tener un nombre único, y esto se logra a través de los constructores. Para esto, SystemC proporciona un macro `SC_CTOR`, el cuál declara un constructor con un solo argumento, que es el nombre del módulo: `sc_module_name`.
 
-### C. Notación de Tiempo
+Si se requiere pasar más de un argumento, se debe definir un constructor explícito.
+
+**Ejemplo del uso del Constructor**
+
+```cpp
+#include "systemc.h"
+
+SC_MODULE(MODULE_A)
+{
+  const int i;
+
+  SC_CTOR(MODULE_A);
+
+  MODULE_A(sc_module_name name, int i) : sc_module(name), i(i)
+  {
+    SC_METHOD(func_a);
+  }
+
+  void func_a()
+  {
+    std::cout << name() << ", i = " << i << std::endl;
+  }
+};
+
+int sc_main(int, char *[])
+{
+  MODULE_A module_a("module_a", 10);
+
+  sc_start();
+  return 0;
+}
+```
+
+### D. Notación de Tiempo
+Uno de los elementos principales que componen una simulación, es el tiempo. Para representar el tiempo, en SystemC se tiene la clase `sc_time`, la que recibe dos argumentos: un valor numérico y una unidad de tiempo.
+
+Las unidades de tiempo disponibles, son:
+  * `SC_SEC`: 1 segundo
+  * `SC_MS`: 10<sup>−3</sup> segundos
+  * `SC_US`: 10<sup>−6</sup> segundos
+  * `SC_NS`: 10<sup>−9</sup> segundos
+  * `SC_PS`: 10<sup>−12</sup> segundos
+  * `SC_FS`: 10<sup>−15</sup> segundos
 
 
+**Ejemplo:**
 
-### D. Módulo
+```cpp
+#include "systemc.h"
 
+int sc_main(int, char *[])
+{
+  sc_time time_sec(1, SC_SEC);
+  sc_time time_ms(1000, SC_MS);
 
+  std::cout << "Un segundo: " << time_sec << std::endl;
+  std::cout << "Mil milisegundos: " << time_ms << std::endl;
 
-
+  return 0;
+}
+```
 
 </details>
 
@@ -164,6 +294,18 @@ int sc_main(int, char *[])
   return 0;
 }
 ```
+**Su salida es:**
+
+```
+La ejecución comienza @ 0 s
+SC_METHOD triggered @ 0 s
+SC_THREAD triggered @ 0 s
+SC_CTHREAD triggered @ 0 s
+SC_METHOD triggered @ 1 s
+SC_THREAD triggered @ 1 s
+SC_CTHREAD triggered @ 1 s
+La ejecución termina @ 2 s
+```
 
 ### B. Escenarios
 
@@ -186,14 +328,14 @@ La lógica de programación en SystemC se lo abstrae en 3 fases o escenarios:
         <ol type="a">
         <li>Todos los procesos se han ejecutado</li>
         <li>Algún proceso ha ejecutado <code>sc_stop()</code></li>
-        <li>Se ha alcanzado el tiempo máximo</li>
+        <li>Se ha alcanzado el tiempo máximo de simulación</li>
         </ol>
       </li>
       </ol>
     </li>
   </ol>
 </li>
-<li><strong>Limpieza:</strong> esta fase consiste en destruir objetos, librerar memoria, cerrar archivos abiertos, y otras acciones que se requerieran una vez terminadad la simulación.</li>
+<li><strong>Limpieza:</strong> esta fase consiste en destruir objetos, librerar memoria, cerrar archivos abiertos, y otras acciones que se requerieran una vez terminada la simulación.</li>
 </ol>
 
 **Ejemplo de la Simulación por Escenarios**
@@ -262,6 +404,22 @@ int sc_main(int, char *[])
   return 0;
 }
 ```
+**Su salida es:**
+
+```
+0 s: Elaboración: constructor
+Método: before end of elaboration
+Método: end of elaboration
+Método: start of simulation
+0 s: Ejecución.inicialización
+1 s: Ejecución.simulación
+2 s: Ejecución.simulación
+
+Info: /OSCI/SystemC: Simulation stopped by user.
+Método: end of simulation
+2 s: Limpieza: destructor
+```
+
 </details>
 
 ***
@@ -271,7 +429,67 @@ int sc_main(int, char *[])
 Eventos
 </summary>
 
-Contenido...
+Un evento es un elemento utilizado para la sincronización de procesos. En SystemC viene definido por la clase `sc_event`. Esta, a su vez, cuenta con dos métodos:
+
+1. **notify():** crea una notificación. Si no se le pasan argumentos, crea una notificación inmediata. Por otro lado, se le puede pasar un valor numérico y una unidad de tiempo para enviar una notificación planificada.
+    
+2. **cancel():** elimina cualquier notificación pendiente del evento. Se debe tener en cuenta que una notificación inmediata no puede ser cancelada.
+
+**A continuación, un ejemplo:**
+```cpp
+#include "systemc.h"
+
+SC_MODULE(EVENT)
+{
+  sc_event e;
+
+  SC_CTOR(EVENT)
+  {
+    SC_THREAD(trigger);
+    SC_THREAD(catcher);
+  }
+
+  void trigger()
+  {
+    while (true)
+    {
+      e.notify(1, SC_SEC);
+
+      if (sc_time_stamp() == sc_time(2, SC_SEC))
+      {
+        e.cancel();
+      }
+
+      wait(2, SC_SEC);
+    }
+  }
+  void catcher()
+  {
+    while (true)
+    {
+      wait(e);
+      std::cout << "Evento capturado en: " 
+        << sc_time_stamp() << std::endl;
+    }
+  }
+};
+
+int sc_main(int, char *[])
+{
+  EVENT event("event");
+  sc_start(10, SC_SEC);
+
+  return 0;
+}
+```
+
+**Su salida es:**
+```bash
+  Evento capturado en: 1 s
+  Evento capturado en: 5 s
+  Evento capturado en: 7 s
+  Evento capturado en: 9 s
+```
 
 </details>
 
@@ -282,8 +500,57 @@ Contenido...
 Señal
 </summary>
 
-### Leer y Escribir
+### Leer y Escribir (Write/Read)
+Una señal simula el comportamiento de un cable físico transportando una señal electrónica digital. Los métodos importantes serían:
 
+1. **write():** envía una solicitud de actualización, si y solo si el valor nuevo es diferente del actual. Esta actualización se verá reflejada después de un delta_cycle.
+    
+2. **read():** envía el valor actual de la señal sin removerlo.
+
+**A continuación, un ejemplo sencillo:**
+
+```cpp
+#include "systemc.h"
+
+SC_MODULE(SIGNAL)
+{
+  sc_signal<int> value;
+  SC_CTOR(SIGNAL)
+  {
+    SC_THREAD(readwrite);
+  }
+  void readwrite()
+  {
+    value.write(3);
+    std::cout << "Valor inicial de la señal = " << value.read() << std::endl;
+
+    wait(SC_ZERO_TIME);
+    std::cout << "Valor despues del primer delta_cycle = " << value.read() << std::endl;
+
+    value = 42;
+    std::cout << "Valor de la señal = " << value << std::endl;
+
+    wait(SC_ZERO_TIME);
+    std::cout << "Valor despues del segundo delta_cycle = " << value << std::endl;
+  }
+};
+
+int sc_main(int, char *[])
+{
+  SIGNAL signal("signal");
+  signal.value = -1;
+  sc_start();
+  return 0;
+}
+```
+
+**Su salida es:**
+```bash
+  Valor inicial de la señal = -1
+  Valor despues del primer delta_cycle = 3
+  Valor de la señal = 3
+  Valor despues del segundo delta_cycle = 42
+```
 
 
 </details>
@@ -295,7 +562,7 @@ Señal
 Comunicación
 </summary>
 
-### Puerto
+### A. Puerto
 
 Existen tres conceptos claves para la comunicación:
 
@@ -311,7 +578,7 @@ Existen tres conceptos claves para la comunicación:
 1. **Canal:** un canal proporciona funciones para tener comunicación entre módulos. Estos pueden ser primitivos o jerárquicos.
   - La clase `sc_prim_channel` es la base para crear canales primitivos. Estos pueden ser: `sc_mutex`, `sc_fifo` o `sc_semaphore`.
 
-**Ejemplo de la Comunicación por puertos y Canales**
+**Ejemplo de la comunicación por puertos y canales**
 
 ```cpp
 #include "systemc.h"
@@ -415,8 +682,15 @@ int sc_main(int, char *[])
   return 0;
 }
 ```
+**Su salida es:**
+```
+0 s: Lectura del canal propio, valor=1
+0 s: Lectura del canal exterior, valor=1
+1 s: Lectura del canal propio, valor=2
+1 s: Lectura del canal exterior, valor=2
+```
 
-### Puerto a Puerto (Port 2 Port)
+### B. Puerto a Puerto (Port 2 Port)
 
 Pretende cubrir los siguientes casos:
 
@@ -437,7 +711,7 @@ Pretende cubrir los siguientes casos:
   modulo::puerto1 --> modulo::submodulo::puerto2
   ```
 
-**Ejemplo de la Comunicación de puerto a puerto**
+**Ejemplo de la comunicación de puerto a puerto**
 
 ```cpp
 #include "systemc.h"
@@ -525,7 +799,11 @@ int sc_main(int, char *[])
   return 0;
 }
 ```
-
+**Su salida es:**
+```
+0 s: Lectura desde el canal, valor=1
+1 s: Lectura desde el canal, valor=2
+```
 </details>
 
 [Página Principal]({{site.baseurl}}/)

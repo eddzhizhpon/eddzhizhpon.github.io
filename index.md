@@ -66,7 +66,7 @@ export CXX=g++
 ```bash 
 ../configure --prefix=/opt/systemc-2.3.3
 ```
-<small>Nota: el directorio debe estar creado previamente</small>
+    Nota: el directorio debe estar creado previamente.
 
 1. **Compilación del paquete**
 ```bash
@@ -86,8 +86,9 @@ rm -rf objdir
 export SYSTEMC_HOME="/opt/systemc-2.3.3"
 export LD_LIBRARY_PATH="$SYSTEMC_HOME/lib-linux64"
 ```
-El directorio a donde apunta `SYSTEMC_HOME` debe ser el que se configuró con el parámetro `--prefix` en el paso 6.<br/><br/>
-<small>Opcional: Estas variables pueden ser agregadas dentro del archivo `.profile`. Caso contrario, se debe exportar las varibles antes de compilar.</small>
+    El directorio a donde apunta `SYSTEMC_HOME` debe ser el que se configuró con el parámetro `--prefix` en el paso 6.
+
+    Opcional: Estas variables pueden ser agregadas dentro del archivo `.profile` o `.bashrc` para automatizar la exportación. Caso contrario, se deben exportar las varibles antes de compilar.
 
 * * *
 
