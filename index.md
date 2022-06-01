@@ -4,6 +4,10 @@ layout: default
 
 * * *
 
+## Introducción
+
+SystemC es una herramienta OpenSource que proporciona un conjunto de clases y macros de C++ que permite modelar el comportamiento de sistemas. La última versión lanzada fue la v2.3.3, en noviembre de 2018.
+
 ## Requerimientos
 
 ### A. Requisitos de Hardware:
@@ -90,11 +94,20 @@ export LD_LIBRARY_PATH="$SYSTEMC_HOME/lib-linux64"
 
     Opcional: Estas variables pueden ser agregadas dentro del archivo `.profile` o `.bashrc` para automatizar la exportación. Caso contrario, se deben exportar las varibles antes de compilar.
 
-* * *
+***
 
 ## Resultados
 
-* * *
+***
 
-## Conclusiones y Recomendaciones
+## Conclusiones
 
+SystemC provee un gran conjunto de recursos que permiten modelar el comportamiento de sistemas, y por lo tanto, facilita la simulación de eventos discretos. Entre las características de esta herramienta, se encuentran su propia definición de variables de tiempo, tipos de datos, clases y macros que simplificación la comunicación entre los componentes del modelo.
+
+***
+
+## Recomendaciones
+
+Ya que SystemC describe todos los elementos que ofrece usando la sintaxis de C++, es recomendable primero aprender los conceptos básicos de dicho lenguaje, antes de comenzar a desarrollar modelos.
+    
+Por otro lado, teniendo en cuenta que también es posible modelar el comportamiento de hardware, es recomendable tener cierto conocimiento acerca de los fundamentos de compuertas lógicas, componentes electrónicos y señales digitales.

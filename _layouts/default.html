@@ -35,8 +35,8 @@
         {% if site.show_downloads %}
         <ul class="downloads">
           <li><a href="https://www.accellera.org/downloads/standards/systemc" target="_blank">Descargar <strong>SystemC</strong></a></li>
-          <li><a href="#">Ver <strong> Algo</strong></a></li>
-          <li><a href="#">Ejemplo <strong>GitHub</strong></a></li>
+          <li><a href="https://learnsystemc.com/basic/hello_world" target="_blank">Más <strong> Información</strong></a></li>
+          <li><a href="https://github.com/pages-themes/minimal" target="_blank">GitHub Pages <strong>Minimal</strong></a></li>
         </ul>
         {% endif %}
 
@@ -53,7 +53,9 @@
         {% if site.github.is_project_page %}
         <!-- <p>This project is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p> -->
         {% endif %}
-        <p><small>Desplegado en &mdash; <a href="https://github.com/pages-themes/minimal" target="_blank">GitHub Pages</a></small></p>
+        {% if site.github.is_project_page %}
+        <p><small>Desplegado en &mdash; <a href="{{ site.github.owner_url }}" target="_blank">GitHub Pages</a></small></p>
+        {% endif %}
       </footer>
     </div>
     <script src="{{ "/assets/js/scale.fix.js" | relative_url }}"></script>
