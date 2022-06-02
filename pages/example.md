@@ -4,7 +4,36 @@ layout: default
 
 ## Ejemplo Práctico
 
+### A. Planteamiento y descripción del problema
 
+La peluquería XYZ quiere saber cuál sería el posible comportamiento, en base al tiempo, si se contratan más peluqueros. Se tiene que tener en cuenta que el ingreso de clientes al establecimiento se deberá hacer de manera pseudoaleatoria, y que en caso de que no haya peluqueros disponibles, tendrán que esperar hasta que uno esté libre.
+
+El modelo generado deberá ser lo más parametrizable posible, para poder ejecutar varias simulaciones con diferentes datos, y así observar diferentes comportamientos.
+
+### B. Proceso de solución
+
+Para poder modelar el comportamiento de la peluquería, fue necesario establecer analizar y establecer lo siguiente:
+
+1. Los actores y procesos involucrados en el entorno real (la peluquería):
+    - Actores:
+        - Clientes (C)
+        - Peluqueros (P)
+
+    - Procesos:
+        - Ingresar a la peluquería (C).
+        - Esperar el turno (C).
+        - Cortar cabello (P).
+        - Llamar al siguiente cliente (P).
+        - Salir de la peluquería (C).
+
+1. Las variables de interés para el modelo:
+    - Número de peluqueros.
+    - Número de clientes.
+    - Tiempo mínimo y máximo para un corte de cabello.
+
+Una vez se hayan definido una lista de elementos básicos para el modelo, es necesario verificar si los elementos son suficientes. Posterior a una depuración de la lista se procede a la abstracción de las características de aquellos elementos para poder codificarlos.
+
+### C. Código del programa
 
 ```cpp
 #include <systemc.h>
@@ -19,8 +48,6 @@ const double HAIRCUT_TIME_MIN = 10;
 const double HAIRCUT_TIME_MAX = 15;
 const double ARRIVAL_TIME = 5;
 const int CLIENTS_TO_SIMULATE = 10;
-
-double finishMinute = 0.0;
 
 double getRandom() 
 {
@@ -151,8 +178,9 @@ class Hairdressing : public sc_module
         double random = getRandom();
         double arrive = -ARRIVAL_TIME * log(random);
         wait(sc_time(arrive, SC_SEC));
-        cout << "<Recepción> Entra el Cliente " << i << ", y tiene el turno " 
-          << i <<  ", a los " << sc_time_stamp().to_seconds() << " seg " << endl;
+        cout << "<Recepción> Entra el Cliente " << i 
+          << ", y tiene el turno " << i <<  ", a los " 
+          << sc_time_stamp().to_seconds() << " seg " << endl;
         clients.write(i);
         i++;
 
@@ -197,7 +225,8 @@ int sc_main(int argc, char* argv[])
   // Establecimiento de la semilla
   srand(SEED);
 
-  cout << endl << "\t----- Simulación de Peluquería -----" << endl << endl;
+  cout << endl << "\t----- Simulación de Peluquería -----" 
+    << endl << endl;
   sc_start();
   cout << endl << "\t----- Tiempo de simulación = " 
     << sc_time_stamp().to_seconds() << " -----" << endl;

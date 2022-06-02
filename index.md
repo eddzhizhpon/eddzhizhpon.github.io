@@ -2,11 +2,11 @@
 layout: default
 ---
 
-* * *
-
 ## Introducción
 
 SystemC es una herramienta OpenSource que proporciona un conjunto de clases y macros de C++ que permite modelar el comportamiento de sistemas. La última versión lanzada fue la v2.3.3, en noviembre de 2018.
+
+* * *
 
 ## Requerimientos
 
@@ -97,6 +97,10 @@ export LD_LIBRARY_PATH="$SYSTEMC_HOME/lib-linux64"
 ***
 
 ## Resultados
+
+El conjunto de soluciones que proporciona SystemC, hace el proceso de abstracción de sistemas y el modelado de hardware y software sea relativamente sencillo, si se tiene clara la lógica detrás del sistema.
+
+En el <a href="{{'/pages/example.html' | relative_url}}">ejemplo presentado</a> se logró abstraer el comportamiento básico de un entorno real (una peluquería), a un programa de SystemC haciendo uso de elementos como: `sc_module`, `sc_events`, `sc_fifo`, `sc_time`, entre otros.
 
 ***
 

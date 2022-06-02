@@ -56,7 +56,7 @@ a:hover small {
 }
 
 .wrapper {
-  width:1000px;
+  width:1100px;
   margin:0 auto;
 }
 
@@ -186,7 +186,7 @@ strong {
 }
 
 section {
-  width:640px;
+  width:740px;
   float:right;
   padding-bottom:50px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
@@ -215,11 +215,12 @@ footer {
   -webkit-font-smoothing:subpixel-antialiased;
 }
 
-@media print, screen and (max-width: 1120px) {
+@media print, screen and (max-width: 1220px) {
 
   div.wrapper {
-    width:auto;
+    width:90%;
     margin:0;
+    margin: auto;
   }
 
   header, section, footer {
@@ -235,7 +236,6 @@ footer {
   section {
     border:1px solid #e5e5e5;
     border-width:1px 0;
-    // padding:20px 0;
     padding: 1.5rem;
     margin:0 0 20px;
   }
@@ -250,7 +250,11 @@ footer {
     top:52px;
   }
 }
-
+@media print, screen and (max-width: 950px) {
+  div.wrapper {
+    width: auto;
+  }
+}
 @media print, screen and (max-width: 720px) {
   body {
     word-wrap:break-word;

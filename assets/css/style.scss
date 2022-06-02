@@ -48,8 +48,12 @@
     border-radius: 2px;
 }
 
+details[open] .detail-title {
+    background-color: #eeeeee;
+}
+
 .detail-title:hover {
-    background-color: #eeeeee99;
+    background-color: #eeeeee99 !important;
     cursor: pointer;
 }
 
@@ -67,7 +71,7 @@
 }
 
 @keyframes sweep {
-    0%    {opacity: .5; transform: translateY(0)}
-    50%  {opacity: .75; transform: translateY(3px)}
+    0%    {opacity: 1; transform: translateY(0)}
+    50%  {opacity: 0.75; transform: translateY(3px)}
     100%    {opacity: 1; transform: translateY(0)}
 }
