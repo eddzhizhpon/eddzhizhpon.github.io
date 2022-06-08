@@ -106,7 +106,7 @@ En el <a href="{{'/pages/example.html' | relative_url}}">ejemplo presentado</a> 
 
 ## Conclusiones
 
-SystemC provee un gran conjunto de recursos que permiten modelar el comportamiento de sistemas, y por lo tanto, facilita la simulación de eventos discretos. Entre las características de esta herramienta, se encuentran su propia definición de variables de tiempo, tipos de datos, clases y macros que simplificación la comunicación entre los componentes del modelo.
+SystemC provee un gran conjunto de recursos que permiten modelar el comportamiento de sistemas, y por lo tanto, facilita la simulación de eventos discretos. Entre las características de esta herramienta, se encuentran su propia definición de variables de tiempo, tipos de datos, clases y macros que simplifican la comunicación entre los componentes del modelo.
 
 ***
 

@@ -42,7 +42,7 @@ Una vez se hayan definido una lista de elementos básicos para el modelo, es nec
 
 using namespace std;
 
-const int SEED = 69;
+const int SEED = 18;
 const int HAIRCUTTER_NUM = 4;
 const double HAIRCUT_TIME_MIN = 10;
 const double HAIRCUT_TIME_MAX = 15;
@@ -58,8 +58,8 @@ class Haircutter : public sc_module
 {
   public:
     sc_in<int> clientId;
-    sc_event finishEvent;
     sc_event haircutEvent;
+    sc_event finishEvent;
     int id;
     bool isBusy;
     
